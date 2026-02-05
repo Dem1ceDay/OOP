@@ -1,2 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ConsoleApp1;
+
+Product product = new Product()
+{
+	Articul = "123123232212",
+	Name = "Шубка Норковая",
+	Price = "110000",
+	Category = "Верхняя одежда",
+	Volume = 7000,
+};
+product.Print();
