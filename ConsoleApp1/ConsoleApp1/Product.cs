@@ -1,25 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ConsoleApp1
 {
-	internal class Product
+	public class Product
 	{
-		public string Articul { get; set; }
-		public string Name { get; set; }
-		public string Price { get; set; }
-		public string Category { get; set; }
-		public int Volume { get; set; }
-		public void Print()
+		private string _Articul;
+		private string _Name;
+		private string _Price;
+		private string _Category;
+		private int _Volume;
+
+        public string Articul
+        {
+            get => _Articul;
+            set => _Articul = value;
+        }
+
+        public string Name
+        {
+            get => _Name;
+            set => _Name = value;
+        }
+        public string Price
+        {
+            get => _Price;
+            set => _Price = value;
+        }
+        public string Category
+        {
+            get => _Category;
+            set => _Category = value;
+        }
+        public int Volume
+        {
+            get => _Volume;
+            set => _Volume = value;
+        }
+        public Product(string Articul, string Name, string Price, string Category, int Volume)
+        {
+            _Articul = Articul;
+            _Name = Name;
+            _Price = Price;
+            _Category = Category;
+            _Volume = Volume;
+        }
+        
+        public bool MinusVolume(int amount)
+        {
+            if (amount < 0)
+            {
+                Console.WriteLine("Количество для списания должно быть больше 0.");
+                return false;
+            }
+            if (Volume < amount) 
+            {
+                Console.WriteLine($"Недостаточно товара. На складе: {Volume}, запрашивыается {amount}.");
+                return false;
+            }
+
+            Volume-=amount;
+            Console.WriteLine($"Успешно списано {amount} единиц товара {Name}. Остоток: {Volume}.");
+            return true;
+        }
+
+        public bool PlusVolume(int amount)
+        {
+            if (amount < 0)
+            {
+                Console.WriteLine("Количество для поставки должно быть больше 0.");
+                return false;
+            }
+
+            Volume += amount;
+            Console.WriteLine($"Успешно поставлено {amount} единиц товара {Name}. Остоток: {Volume}.");
+            return true;
+        }
+        public void Print()
 		{
 			Console.WriteLine($"Артикул {Articul} ");
 			Console.WriteLine($"Имя {Name} ");
 			Console.WriteLine($"Цена {Price} ");
 			Console.WriteLine($"Категория {Category} ");
 			Console.WriteLine($"Количество {Volume} ");
-		}
+            Console.WriteLine();
+
+        }
 	}
 }
