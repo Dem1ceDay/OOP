@@ -3,9 +3,9 @@
 
 string Articul = "123123232212",
 Name = "Шубка Норковая",
-Price = "110000",
 Category = "Верхняя одежда";
-int Volume = 7000;
+int Price = 109990,
+Volume = 7000;
 
 Product SHUBA = new Product(Articul, Name, Price, Category, Volume);
 SHUBA.Print();

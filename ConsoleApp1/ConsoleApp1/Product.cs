@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -12,37 +13,11 @@ namespace ConsoleApp1
 	{
 		private string _Articul;
 		private string _Name;
-		private string _Price;
+		private int _Price;
 		private string _Category;
 		private int _Volume;
 
-        public string Articul
-        {
-            get => _Articul;
-            set => _Articul = value;
-        }
-
-        public string Name
-        {
-            get => _Name;
-            set => _Name = value;
-        }
-        public string Price
-        {
-            get => _Price;
-            set => _Price = value;
-        }
-        public string Category
-        {
-            get => _Category;
-            set => _Category = value;
-        }
-        public int Volume
-        {
-            get => _Volume;
-            set => _Volume = value;
-        }
-        public Product(string Articul, string Name, string Price, string Category, int Volume)
+        public Product(string Articul, string Name, int Price, string Category, int Volume)
         {
             _Articul = Articul;
             _Name = Name;
@@ -50,8 +25,32 @@ namespace ConsoleApp1
             _Category = Category;
             _Volume = Volume;
         }
-        
-        public bool MinusVolume(int amount)
+		public string Articul
+		{
+			get => _Articul;
+			set => _Articul = value;
+		}
+		public string Name
+		{
+			get => _Name;
+			set => _Name = value;
+		}
+		public int Price
+		{
+			get => _Price;
+			set => _Price = value;
+		}
+		public string Category
+		{
+			get => _Category;
+			set => _Category = value;
+		}
+		public int Volume
+		{
+			get => _Volume;
+			set => _Volume = value;
+		}
+		public bool MinusVolume(int amount)
         {
             if (amount < 0)
             {
@@ -81,11 +80,12 @@ namespace ConsoleApp1
             Console.WriteLine($"Успешно поставлено {amount} единиц товара {Name}. Остоток: {Volume}.");
             return true;
         }
+       
         public void Print()
 		{
 			Console.WriteLine($"Артикул {Articul} ");
 			Console.WriteLine($"Имя {Name} ");
-			Console.WriteLine($"Цена {Price} ");
+			Console.WriteLine($"Цена {Price} руб");
 			Console.WriteLine($"Категория {Category} ");
 			Console.WriteLine($"Количество {Volume} ");
             Console.WriteLine();
