@@ -1,15 +1,37 @@
 ﻿	using ConsoleApp1;
+using System;
+using static ConsoleApp1.ElectronicProduct;
 
+namespace LabWork
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Product[] products = new Product[]
+            {
+                new FoodProduct("A001", "Молоко", 150.0m, "Молочные продукты", 50, new DateTime(2026, 4, 30)),
+                new ElectronicsProduct("A002", "Iphone 15", 54990.0m, "Электроника", 10, 12),
+                new ClothingProduct("A003", "Куртка зимняя", 9000.0m, "Одежда", 25, "L")
+            };
 
-string Articul = "123123232212",
-Name = "Шубка Норковая",
-Category = "Верхняя одежда";
-int Price = 109990,
-Volume = 7000;
+            foreach (Product product in products)
+            {
+                product.ShowInfo();
 
-Product SHUBA = new Product(Articul, Name, Price, Category, Volume);
-SHUBA.Print();
-SHUBA.MinusVolume(2000);
-SHUBA.Print();
-SHUBA.PlusVolume(1000);
-SHUBA.Print();
+                if (product is IDiscountable discountable)
+                {
+                    if (product is FoodProduct)
+                        discountable.ApplyDiscount(25); //лимит 30%
+                    else if (product is ElectronicsProduct)
+                        discountable.ApplyDiscount(20); //лимит 20%
+                    else
+                        discountable.ApplyDiscount(30); //без ограничений
+                }
+                Console.WriteLine();
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
